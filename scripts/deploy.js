@@ -1,0 +1,18 @@
+const hre = require("hardhat");
+
+async function main() {
+  console.log("Deploying Voting contract...");
+
+  const Voting = await hre.ethers.getContractFactory("Voting");
+  const voting = await Voting.deploy();
+  await voting.waitForDeployment();
+
+  const address = await voting.getAddress();
+  console.log("Voting contract deployed to:", address);
+  console.log("Save this address into frontend/src/contract-config.js as CONTRACT_ADDRESS");
+}
+
+main().catch((error) => {
+  console.error(error);
+  process.exitCode = 1;
+});

@@ -1,0 +1,17 @@
+{
+  "name": "decentralized-voting-app",
+  "version": "1.0.0",
+  "description": "A tamper-proof decentralized voting platform built on Ethereum using Solidity smart contracts, with a React.js frontend integrated with MetaMask for secure authentication.",
+  "scripts": {
+    "compile": "hardhat compile",
+    "test": "hardhat test",
+    "deploy:sepolia": "hardhat run scripts/deploy.js --network sepolia",
+    "deploy:goerli": "hardhat run scripts/deploy.js --network goerli",
+    "node": "hardhat node"
+  },
+  "devDependencies": {
+    "@nomicfoundation/hardhat-toolbox": "^4.0.0",
+    "hardhat": "^2.19.0",
+    "dotenv": "^16.4.5"
+  }
+}
