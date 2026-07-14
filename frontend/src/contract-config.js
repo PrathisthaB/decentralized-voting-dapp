@@ -1,6 +1,6 @@
 // After deploying with `npm run deploy:sepolia` (see backend README),
 // paste the printed contract address below.
-export const CONTRACT_ADDRESS = "0xYourDeployedContractAddressHere";
+export const CONTRACT_ADDRESS = "0x23EC500801821DD183C98231fA58F709F4F2B57b";
 
 // This ABI matches contracts/Voting.sol exactly.
 // (You can also regenerate it yourself from artifacts/contracts/Voting.sol/Voting.json
