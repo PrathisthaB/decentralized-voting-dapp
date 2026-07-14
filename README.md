@@ -111,7 +111,12 @@ As mentioned in the resume bullet, the frontend can be pinned to IPFS for decent
 | Evaluated layer-2 scaling solutions | See note below |
 
 ### Note on "Layer-2 scaling solutions"
-This repo deploys to Ethereum L1 testnet directly, which is the right starting point. If you want this bullet to be fully accurate before an interview, a natural next step is redeploying the same `Voting.sol` contract unchanged to a Layer-2 testnet (e.g. **Polygon Amoy** or **Arbitrum Sepolia**) via Hardhat, and comparing gas costs / confirmation times against Sepolia L1. I can help you set that up too — just ask.
+`hardhat.config.js` now includes ready-to-use **Polygon Amoy** and **Arbitrum Sepolia** L2 testnet configs alongside Sepolia (L1):
+```bash
+npm run deploy:polygon-amoy
+npm run deploy:arbitrum-sepolia
+```
+Deploy the same `Voting.sol` to both and note the gas cost + confirmation time next to your Sepolia numbers — that comparison is the actual evidence behind the "evaluated layer-2 scaling solutions" resume line, and it's a strong interview talking point (L2 rollups batch transactions off-chain and settle to L1, so per-vote gas cost drops sharply for a large-scale election).
 
 ## Talking Points for Interviews
 
@@ -119,3 +124,14 @@ This repo deploys to Ethereum L1 testnet directly, which is the right starting p
 - Trade-off of storing votes on-chain (transparent, immutable) vs. off-chain with on-chain hash commitments (cheaper gas, still verifiable).
 - Access control via `onlyOwner` modifier and why a real system might want multi-sig admin instead of a single address.
 - Reentrancy is not a risk here since `vote()` doesn't send ETH or call external contracts — worth mentioning you considered it.
+
+## Updating the Live (Deployed) Site
+
+The Vercel deployment only rebuilds the `frontend/` folder — it does **not** know about `Voting.sol` changes automatically. After pulling these updates:
+
+1. **If you only changed frontend code/design** (no `.sol` changes): just push to the GitHub repo connected to Vercel. Vercel auto-detects the push and redeploys in ~1-2 minutes. No new contract deployment needed.
+2. **If you changed `Voting.sol`** (e.g. deploying to a new network like Polygon Amoy): the contract gets a **new address**. You must:
+   - Run the relevant `npm run deploy:...` command to get the new address.
+   - Paste it into `frontend/src/contract-config.js` as `CONTRACT_ADDRESS`.
+   - Commit and push — Vercel picks up the new frontend build with the updated address automatically.
+3. Old votes/candidates only exist on the old contract address — a redeploy starts the election state fresh, so only do it between "elections," not mid-way through one you're demoing live.

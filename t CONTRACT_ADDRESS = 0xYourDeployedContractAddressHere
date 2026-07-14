@@ -1,0 +1,13 @@
+warning: in the working copy of 'frontend/src/contract-config.js', LF will be replaced by CRLF the next time Git touches it
+[1mdiff --git a/frontend/src/contract-config.js b/frontend/src/contract-config.js[m
+[1mindex 0f0170e..8cacecd 100644[m
+[1m--- a/frontend/src/contract-config.js[m
+[1m+++ b/frontend/src/contract-config.js[m
+[36m@@ -1,6 +1,6 @@[m
+ // After deploying with `npm run deploy:sepolia` (see backend README),[m
+ // paste the printed contract address below.[m
+[31m-export const CONTRACT_ADDRESS = "0x23EC500801821DD183C98231fA58F709F4F2B57b";[m
+[32m+[m[32mexport const CONTRACT_ADDRESS = "0xYourDeployedContractAddressHere";[m
+ [m
+ // This ABI matches contracts/Voting.sol exactly.[m
+ // (You can also regenerate it yourself from artifacts/contracts/Voting.sol/Voting.json[m
